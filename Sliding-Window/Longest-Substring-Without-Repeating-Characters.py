@@ -1,4 +1,5 @@
 def lengthOfLongestSubstring(s):
+
     n = len(s)
     if n == 0:
         return 0
@@ -24,3 +25,33 @@ def lengthOfLongestSubstring(s):
                 l += 1
                 count -= 1
     return longest
+
+
+
+
+def lengthOfLongestSubstringSecond(s):
+    if len(s) == 0:
+        return 0
+    
+    ss_element_set = set()
+    l = 0
+    ss_element_set.add(s[l])
+    max_ss_length = 1
+
+    for r in range(1, len(s)):
+        
+        while s[r] in ss_element_set and l < r:
+            ss_element_set.remove(s[l])
+            l += 1
+        
+        ss_element_set.add(s[r])
+        if len(ss_element_set) > max_ss_length:
+            max_ss_length = len(ss_element_set)
+        
+    return max_ss_length
+
+print(lengthOfLongestSubstringSecond("abcabcbb"))
+print(lengthOfLongestSubstringSecond(""))
+print(lengthOfLongestSubstringSecond("    "))
+print(lengthOfLongestSubstringSecond("bbbbb"))
+print(lengthOfLongestSubstringSecond("pwwkew"))
